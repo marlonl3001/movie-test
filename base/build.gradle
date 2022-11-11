@@ -1,0 +1,50 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-parcelize'
+}
+apply from: "$rootDir/tools/versions.gradle"
+android {
+    compileSdk 32
+
+    defaultConfig {
+        minSdk 21
+        targetSdk 32
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    implementation deps.androidx.lifecycle
+    implementation deps.androidx.lifecycle_ext
+    implementation deps.androidx.lifecycle_livedata
+    //Timber
+    api deps.others.timber
+
+    //Gson
+    implementation 'com.google.code.gson:gson:2.8.9'
+
+    //Retrofit
+    api deps.retrofit.runtime
+
+    //Koin
+    api deps.koin.android
+    api deps.koin.viewmodel
+    api deps.koin.test
+}

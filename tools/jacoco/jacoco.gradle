@@ -1,0 +1,105 @@
+apply plugin: 'jacoco'
+apply from: "$rootDir/tools/versions.gradle"
+
+jacoco {
+    toolVersion = deps.version.jacoco
+}
+
+tasks.withType(Test) {
+    jacoco.includeNoLocationClasses = true
+    jacoco.excludes = ['jdk.internal.*']
+}
+
+project.afterEvaluate {
+
+    if (!project.hasProperty("android")) return
+
+    // Grab all build types and product flavors
+    def buildTypes = android.buildTypes.collect { type ->
+        type.name
+    }
+    def productFlavors = android.productFlavors.collect { flavor ->
+        flavor.name
+    }
+    // When no product flavors defined, use empty
+    if (!productFlavors) productFlavors.add('')
+    productFlavors.each { productFlavorName ->
+        buildTypes.each { buildTypeName ->
+            def sourceName
+            if (!productFlavorName) {
+                sourceName = "${buildTypeName}"
+            } else {
+                sourceName = "${productFlavorName}${buildTypeName.capitalize()}"
+            }
+            def localTestCoverageTask = "test${sourceName.capitalize()}UnitTest"
+            def uiTestCoverageTask = "create${sourceName.capitalize()}CoverageReport"
+
+            def tasksArray
+            if (project.android.buildTypes.debug.testCoverageEnabled) {
+                tasksArray = ["$localTestCoverageTask" , "$uiTestCoverageTask"] //Uncomment for enable coverage for Instrumented tests
+            } else {
+                tasksArray = ["$localTestCoverageTask"]
+            }
+
+            // Create coverage task 'testFlavorTypeCoverage'
+            tasks.create(name: "test${sourceName.capitalize()}Coverage", type: JacocoReport, dependsOn: tasksArray) {
+                group = "Reporting"
+                description = "Generate Jacoco coverage reports on the ${sourceName.capitalize()} build."
+
+                def fileFilter = [
+                    '**/R.class',
+                    '**/R$*.class',
+                    '**/BuildConfig.*',
+                    '**/Manifest*.*',
+                    '**/*Test*.*',
+                    'android/**/*.*',
+                    '**/*Creator.class',
+                    '**/*\$Lambda$*.*',
+                    '**/*\$inlined$*.*',
+                    '**/analytics/*',
+                    '**/di/*',
+                    '**/base/model/*',
+                    '**/entity/*',
+                    '**/base/network/model/*',
+                    '**/base/database/dao/*Impl*',
+                    '**/*Initialization$init*', //código gerado pelo Koin
+                    '**/*Initialization*', //código gerado pelo Koin
+                    '**/common/modules/*',
+                    '**/home/presentation/Home*', //Código da Home nova que está sem uso por enquanto
+                    '**/orders/model/*'
+                ]
+                def debugTree = fileTree(dir: "${buildDir}/intermediates/javac/$sourceName/classes", excludes: fileFilter)
+                def kotlinDebugTree = fileTree(dir: "${buildDir}/tmp/kotlin-classes/$sourceName", excludes: fileFilter)
+
+                classDirectories.setFrom(files([debugTree], [kotlinDebugTree]))
+
+                def javaSrc = [
+                    "src/main/java",
+                    "src/$productFlavorName/java"
+                ]
+
+                def kotlinSrc = [
+                    "src/main/kotlin",
+                    "src/$productFlavorName/kotlin"
+                ]
+
+                additionalSourceDirs.setFrom(files([javaSrc, kotlinSrc]))
+                sourceDirectories.setFrom(files([javaSrc, kotlinSrc]))
+
+                executionData.setFrom(fileTree(dir: project.buildDir, includes: [
+                    "/jacoco/${localTestCoverageTask}.exec", // Local test
+                    "/outputs/code_coverage/${sourceName}AndroidTest/connected/*.ec" // Instrumented test
+                ]))
+
+                reports {
+                    xml.enabled = true
+                    html.enabled = true
+                }
+
+                doLast() {
+                    print "file://${reports.html.destination}/index.html\n"
+                }
+            }
+        }
+    }
+}
