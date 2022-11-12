@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.PodiumTechinalChallenge" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -12,5 +12,28 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+    </style>
+
+    <style name="SectionTextStyle" parent="@android:style/Widget.TextView">
+        <item name="android:paddingVertical">@dimen/margin16</item>
+        <item name="android:textColor">@color/background800</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/font18</item>
+    </style>
+
+    <style name="RecommendedMovieTextStyle" parent="SectionTextStyle">
+        <item name="android:paddingVertical">@dimen/margin8</item>
+    </style>
+
+    <style name="Button.Rounded" parent="Widget.Material3.Button.UnelevatedButton">
+        <item name="android:textSize">14sp</item>
+        <item name="textAllCaps">false</item>
+    </style>
+
+    <style name="Button.Outlined" parent="Button.Rounded">
+        <item name="android:backgroundTint">@android:color/transparent</item>
+        <item name="strokeColor">@color/colorPrimary</item>
+        <item name="strokeWidth">2dp</item>
+        <item name="theme">@style/Widget.Material3.Button.OutlinedButton</item>
     </style>
 </resources>

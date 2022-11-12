@@ -2,8 +2,8 @@ package com.podium.technicalchallenge.data.repository
 
 import br.com.mdr.base.extension.SerializationExtension.jsonToObject
 import com.podium.technicalchallenge.data.MoviesApi
+import com.podium.technicalchallenge.data.entity.GenresResponse
 import com.podium.technicalchallenge.data.entity.MovieResponse
-import com.podium.technicalchallenge.domain.entity.MovieEntity
 import com.podium.technicalchallenge.data.network.queries.Queries
 import org.json.JSONObject
 
@@ -12,21 +12,22 @@ sealed class Result<out R> {
     data class Error(val exception: Exception) : Result<Nothing>()
 }
 
-interface MoviesRepository {
-    suspend fun getMovies(): MovieResponse?
+interface HomeRepository {
+    suspend fun getMovies(limit: Int? = null): MovieResponse?
+    suspend fun getGenres(): GenresResponse?
 }
 
-class MoviesRepositoryImpl(
+class HomeRepositoryImpl(
     private val api: MoviesApi
-): MoviesRepository {
+): HomeRepository {
 
-    override suspend fun getMovies(): MovieResponse? {
+    override suspend fun getMovies(limit: Int?): MovieResponse? {
         val paramObject = JSONObject()
         paramObject.put(
-            "query", Queries.moviesQuery
+            "query", Queries.moviesQuery(limit)
         )
 
-        val response = api.postGetMovies(paramObject.toString())
+        val response = api.getMovies(paramObject.toString())
         return response.jsonToObject<MovieResponse>()
 
 //        val jsonBody = response.body()
@@ -36,5 +37,15 @@ class MoviesRepositoryImpl(
 //        } else {
 //            Result.Error(java.lang.Exception())
 //        }
+    }
+
+    override suspend fun getGenres(): GenresResponse? {
+        val paramObject = JSONObject()
+        paramObject.put(
+            "query", Queries.genresQuery
+        )
+
+        val response = api.getGenres(paramObject.toString())
+        return response.jsonToObject<GenresResponse>()
     }
 }

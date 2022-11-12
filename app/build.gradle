@@ -47,6 +47,7 @@ dependencies {
     implementation deps.androidx.constraint_layout
     implementation deps.androidx.navigation_fragment
     implementation deps.androidx.navigation_ui
+    implementation deps.androidx.recyclerview
 
     //implementation 'androidx.core:core-ktx:1.8.0'
 
@@ -84,6 +85,7 @@ dependencies {
     //Glide
     api deps.glide.runtime
     api deps.glide.compiler
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     //test
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Movies_Technical_Challenge.iml" filepath="$PROJECT_DIR$/.idea/modules/Movies_Technical_Challenge.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Movies_Technical_Challenge.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Movies_Technical_Challenge.app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/base/Movies_Technical_Challenge.base.iml" filepath="$PROJECT_DIR$/.idea/modules/base/Movies_Technical_Challenge.base.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MovieFlix.iml" filepath="$PROJECT_DIR$/.idea/modules/MovieFlix.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/MovieFlix.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/MovieFlix.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/base/MovieFlix.base.iml" filepath="$PROJECT_DIR$/.idea/modules/base/MovieFlix.base.iml" />
     </modules>
   </component>
 </project>

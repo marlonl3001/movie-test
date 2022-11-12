@@ -19,10 +19,10 @@ object ViewBinding {
 
     @JvmStatic
     @BindingAdapter("imageUrl")
-    fun bindLoadImage(view: AppCompatImageView, url: String) {
-        Glide.with(view.context)
+    fun AppCompatImageView.bindLoadImage(url: String?) {
+        Glide.with(this.context)
             .load(url)
-            .into(view)
+            .into(this)
     }
 
     @JvmStatic
