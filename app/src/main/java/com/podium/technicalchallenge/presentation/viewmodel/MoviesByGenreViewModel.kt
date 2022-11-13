@@ -7,7 +7,7 @@ class MoviesByGenreViewModel(private val useCase: MainUseCase) : BaseMoviesViewM
     fun getMovies(genre: String) {
         launch {
             mutableMovies.postValue(useCase.getMovies(genre = genre, limit = pageLimit))
-            pageLimit += pageLimit
+            pageLimit += INITIAL_PAGE_NUMBER
         }
     }
 }

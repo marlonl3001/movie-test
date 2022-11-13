@@ -17,4 +17,6 @@
     <color name="textPrimary">#221F1F</color>
     <color name="textSecondary">#2B292B</color>
     <color name="toolbarIconTint">@color/background800</color>
+
+    <color name="black_alpha_40">#33000000</color>
 </resources>

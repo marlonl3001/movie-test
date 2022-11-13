@@ -7,7 +7,6 @@ import com.podium.technicalchallenge.domain.entity.MovieEntity
 import com.podium.technicalchallenge.domain.entity.SortType
 import com.podium.technicalchallenge.domain.usecase.MainUseCase
 
-private const val INITIAL_PAGE_NUMBER = 0
 private const val TOP_FIVE_MOVIES = 5
 
 class HomeViewModel(private val useCase: MainUseCase) : BaseMoviesViewModel() {

@@ -18,6 +18,7 @@ import com.podium.technicalchallenge.presentation.adapter.MoviesAdapter
 import com.podium.technicalchallenge.presentation.viewmodel.MoviesByGenreViewModel
 import com.podium.technicalchallenge.utils.SpacesItemDecoration
 import com.podium.technicalchallenge.utils.extension.navigateTo
+import com.podium.technicalchallenge.utils.extension.pop
 import com.podium.technicalchallenge.utils.extension.showBottomSheet
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -59,6 +60,7 @@ class MoviesByGenreFragment : Fragment() {
             R.id.sort -> {
                 openSortBottomSheet()
             }
+            android.R.id.home -> pop()
         }
         return true
     }
@@ -100,14 +102,10 @@ class MoviesByGenreFragment : Fragment() {
 
             (activity as? AppCompatActivity)?.let {
                 it.setSupportActionBar(toolbar)
-                it.supportActionBar?.setDisplayShowHomeEnabled(true)
+                it.supportActionBar?.setDisplayHomeAsUpEnabled(true)
             }
 
         }
-    }
-
-    private fun onMovieClickListener(): (movie: MovieEntity) -> Unit = {
-        navigateTo(MoviesByGenreFragmentDirections.actionMoviesByGenreFragmentToMovieDetailFragment(it))
     }
 
     private fun openSortBottomSheet() {
@@ -118,6 +116,10 @@ class MoviesByGenreFragment : Fragment() {
         }
         showBottomSheet(bottomSheet)
         isSorting = true
+    }
+
+    private fun onMovieClickListener(): (movie: MovieEntity) -> Unit = {
+        navigateTo(MoviesByGenreFragmentDirections.actionMoviesByGenreFragmentToMovieDetailFragment(it))
     }
 
     private fun onScrollListener(genre: String) = object: RecyclerView.OnScrollListener() {

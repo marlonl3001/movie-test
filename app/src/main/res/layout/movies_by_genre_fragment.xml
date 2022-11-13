@@ -23,7 +23,6 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@android:color/transparent"
             app:navigationIcon="@drawable/ic_arrow_back"
             app:menu="@menu/genre_menu"
             app:title="@{genre}"

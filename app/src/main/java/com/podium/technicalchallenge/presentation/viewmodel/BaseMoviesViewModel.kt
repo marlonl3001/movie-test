@@ -6,7 +6,7 @@ import br.com.mdr.base.presentation.BaseViewModel
 import com.podium.technicalchallenge.domain.entity.MovieEntity
 import com.podium.technicalchallenge.domain.entity.SortType
 
-private const val INITIAL_PAGE_NUMBER = 30
+const val INITIAL_PAGE_NUMBER = 30
 
 open class BaseMoviesViewModel : BaseViewModel() {
     protected var pageLimit: Int = INITIAL_PAGE_NUMBER
