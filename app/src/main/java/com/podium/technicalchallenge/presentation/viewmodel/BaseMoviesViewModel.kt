@@ -6,8 +6,10 @@ import br.com.mdr.base.presentation.BaseViewModel
 import com.podium.technicalchallenge.domain.entity.MovieEntity
 import com.podium.technicalchallenge.domain.entity.SortType
 
-open class BaseMoviesViewModel : BaseViewModel() {
+private const val INITIAL_PAGE_NUMBER = 30
 
+open class BaseMoviesViewModel : BaseViewModel() {
+    protected var pageLimit: Int = INITIAL_PAGE_NUMBER
     protected val mutableMovies = MutableLiveData<List<MovieEntity>?>()
     val allMovies: LiveData<List<MovieEntity>?> = mutableMovies
 

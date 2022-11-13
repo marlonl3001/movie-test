@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.podium.technicalchallenge.R
 import com.podium.technicalchallenge.databinding.MoviesByGenreFragmentBinding
 import com.podium.technicalchallenge.domain.entity.MovieEntity
@@ -24,6 +25,8 @@ class MoviesByGenreFragment : Fragment() {
     private lateinit var moviesAdapter: MoviesAdapter
     private var binding: MoviesByGenreFragmentBinding? = null
     private val viewModel: MoviesByGenreViewModel by viewModel()
+
+    private var isSorting = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -69,7 +72,10 @@ class MoviesByGenreFragment : Fragment() {
         with(viewModel) {
             allMovies.observe(viewLifecycleOwner) {
                 moviesAdapter.submitList(it)
-                binding?.recyclerMovies?.smoothScrollToPosition(START_POSITION)
+                if (isSorting) {
+                    binding?.recyclerMovies?.smoothScrollToPosition(START_POSITION)
+                    isSorting = false
+                }
             }
 
             errorApi.observe(viewLifecycleOwner) {
@@ -86,6 +92,8 @@ class MoviesByGenreFragment : Fragment() {
         binding?.apply {
             recyclerMovies.addItemDecoration(SpacesItemDecoration(spanCount = 2,
                 orientation = GridLayoutManager.VERTICAL))
+
+            recyclerMovies.addOnScrollListener(onScrollListener(genreName))
 
             adapter = moviesAdapter
             genre = genreName
@@ -109,5 +117,16 @@ class MoviesByGenreFragment : Fragment() {
             }
         }
         showBottomSheet(bottomSheet)
+        isSorting = true
+    }
+
+    private fun onScrollListener(genre: String) = object: RecyclerView.OnScrollListener() {
+        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+            super.onScrollStateChanged(recyclerView, newState)
+
+            if (recyclerView.canScrollVertically(RecyclerView.VERTICAL).not()) {
+                viewModel.getMovies(genre)
+            }
+        }
     }
 }
