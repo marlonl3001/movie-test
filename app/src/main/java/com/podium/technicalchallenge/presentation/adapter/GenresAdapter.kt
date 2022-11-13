@@ -8,20 +8,20 @@ import androidx.recyclerview.widget.RecyclerView
 import com.podium.technicalchallenge.databinding.MovieGenreTemBinding
 
 class GenresAdapter:
-    ListAdapter<String, GenresAdapter.HomeMoviesViewHolder>(GenresCallback()) {
+    ListAdapter<String, GenresAdapter.GenresViewHolder>(GenresCallback()) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeMoviesViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GenresViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = MovieGenreTemBinding.inflate(inflater, parent, false)
 
-        return HomeMoviesViewHolder(binding)
+        return GenresViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: HomeMoviesViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: GenresViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 
-    class HomeMoviesViewHolder(val binding: MovieGenreTemBinding):
+    class GenresViewHolder(val binding: MovieGenreTemBinding):
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(genre: String) {

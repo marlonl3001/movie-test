@@ -109,16 +109,6 @@
                 app:layout_constraintStart_toStartOf="@id/txtSectionTopFive"
                 app:layout_constraintTop_toBottomOf="@id/recyclerTopMovies"/>
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/imgFilter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/margin16"
-                android:layout_marginEnd="@dimen/margin16"
-                app:srcCompat="@drawable/ic_filter"
-                app:layout_constraintBottom_toBottomOf="@id/txtSectionGenres"
-                app:layout_constraintEnd_toEndOf="parent"/>
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerGenres"
                 android:layout_width="match_parent"
@@ -139,7 +129,15 @@
                 app:layout_constraintStart_toStartOf="@id/txtSectionTopFive"
                 app:layout_constraintTop_toBottomOf="@id/recyclerGenres"/>
 
-
+            <com.google.android.material.button.MaterialButton
+                style="@style/Button.Icon"
+                android:id="@+id/btnFilter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:icon="@drawable/ic_filter"
+                app:layout_constraintBottom_toBottomOf="@id/txtSectionAll"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/txtSectionAll"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerBrowseAll"

@@ -10,6 +10,7 @@ import com.podium.technicalchallenge.domain.entity.MovieEntity
 import com.podium.technicalchallenge.presentation.adapter.GenresAdapter
 import com.podium.technicalchallenge.presentation.adapter.MoviesAdapter
 import com.podium.technicalchallenge.presentation.binding.ViewBinding.bindLoadImage
+import com.podium.technicalchallenge.utils.extension.navigateTo
 import com.podium.technicalchallenge.presentation.viewmodel.HomeViewModel
 import com.podium.technicalchallenge.utils.SpacesItemDecoration
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -58,7 +59,6 @@ class HomeFragment: Fragment() {
             allMovies.observe(viewLifecycleOwner) {
                 moviesAdapter.submitList(it)
                 setRecommendedMovie(it?.random())
-
             }
 
             genresList.observe(viewLifecycleOwner) {
@@ -76,8 +76,8 @@ class HomeFragment: Fragment() {
     }
 
     private fun setupRecyclerView() {
-        topMoviesAdapter = MoviesAdapter()
-        moviesAdapter = MoviesAdapter()
+        topMoviesAdapter = MoviesAdapter(onMovieClickListener())
+        moviesAdapter = MoviesAdapter(onMovieClickListener())
         genresAdapter = GenresAdapter()
 
         binding?.apply {
@@ -96,5 +96,9 @@ class HomeFragment: Fragment() {
             imgRecommendedMovie.bindLoadImage(movie?.posterPath)
             txtMovieTitle.text = movie?.title
         }
+    }
+
+    private fun onMovieClickListener(): (movie: MovieEntity) -> Unit = {
+        navigateTo(HomeFragmentDirections.actionHomeToMovieDetailFragment(it))
     }
 }

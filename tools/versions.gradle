@@ -42,6 +42,8 @@ version.progress_view = '1.1.3'
 version.ribbon = '1.0.4'
 version.palette = '1.0.0'
 version.bundler = '1.0.4'
+version.navigation_safe_args = '2.5.3'
+version.circular_imageview = '4.3.1'
 
 def androidx = [:]
 androidx.appcompat = "androidx.appcompat:appcompat:$version.supportLibrary"
@@ -68,6 +70,7 @@ classpath.spotless = "com.diffplug.spotless:spotless-plugin-gradle:$version.spot
 classpath.jacoco = "org.jacoco:org.jacoco.core:$version.jacoco"
 classpath.sonarqube = "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:$version.sonarqube"
 classpath.gradleVersionsPlugin = "com.github.ben-manes:gradle-versions-plugin:$version.gradle_versions_plugin"
+classpath.navigationSafeArgs = "androidx.navigation:navigation-safe-args-gradle-plugin:$version.navigation_safe_args"
 
 def koin = [:]
 koin.android = "io.insert-koin:koin-android:$version.koin"
@@ -95,6 +98,7 @@ okhttp.logging = "com.squareup.okhttp3:logging-interceptor:$version.okhttp"
 
 def others = [:]
 others.timber = "com.jakewharton.timber:timber:$version.timber"
+others.circular_imageview = "com.mikhaellopez:circularimageview:$version.circular_imageview"
 
 def retrofit = [:]
 retrofit.runtime = "com.squareup.retrofit2:retrofit:$version.retrofit"

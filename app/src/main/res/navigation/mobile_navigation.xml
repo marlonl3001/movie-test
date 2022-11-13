@@ -22,11 +22,23 @@
         <action
             android:id="@+id/action_home_to_dashboard"
             app:destination="@id/dashboard" />
+        <action
+            android:id="@+id/action_home_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/notifications"
         android:name="com.podium.technicalchallenge.presentation.fragment.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/movieDetailFragment"
+        android:name="com.podium.technicalchallenge.presentation.fragment.MovieDetailFragment"
+        android:label="fragment_movie_detail"
+        tools:layout="@layout/fragment_movie_detail" >
+        <argument
+            android:name="movie"
+            app:argType="com.podium.technicalchallenge.domain.entity.MovieEntity" />
+    </fragment>
 
 </navigation>

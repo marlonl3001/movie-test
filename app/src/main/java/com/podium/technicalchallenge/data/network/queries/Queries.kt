@@ -11,19 +11,37 @@ object Queries {
                         releaseDate
                         posterPath
                         voteAverage
+                        overview
+                        genres
+                        cast {
+                            name
+                            profilePath
+                        }
+                        director {
+                          name
+                        }
                       }
                     }
                 """
             } else {
                 """
                     query GetMoviesQuery {
-                  movies {
-                    title
-                    releaseDate
-                    posterPath
-                    voteAverage
-                  }
-                }
+                      movies {
+                        title
+                        releaseDate
+                        posterPath
+                        voteAverage
+                        overview
+                        genres
+                        cast {
+                            name
+                            profilePath
+                        }
+                        director {
+                          name
+                        }
+                      }
+                    }
                 """
             }
         return query

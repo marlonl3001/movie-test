@@ -1,9 +1,9 @@
 package com.podium.technicalchallenge.presentation.binding
 
 import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.OnBackPressedDispatcherOwner
-import androidx.appcompat.widget.AppCompatImageView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 
@@ -19,7 +19,7 @@ object ViewBinding {
 
     @JvmStatic
     @BindingAdapter("imageUrl")
-    fun AppCompatImageView.bindLoadImage(url: String?) {
+    fun ImageView.bindLoadImage(url: String?) {
         Glide.with(this.context)
             .load(url)
             .into(this)

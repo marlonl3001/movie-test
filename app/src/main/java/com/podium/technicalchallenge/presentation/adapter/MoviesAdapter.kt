@@ -8,25 +8,31 @@ import androidx.recyclerview.widget.RecyclerView
 import com.podium.technicalchallenge.databinding.HomeMovieItemBinding
 import com.podium.technicalchallenge.domain.entity.MovieEntity
 
-class MoviesAdapter:
+class MoviesAdapter(
+    private val onMovieClick: (movie: MovieEntity) -> Unit
+):
     ListAdapter<MovieEntity, MoviesAdapter.HomeMoviesViewHolder>(MoviesCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeMoviesViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = HomeMovieItemBinding.inflate(inflater, parent, false)
 
-        return HomeMoviesViewHolder(binding)
+        return HomeMoviesViewHolder(binding, onMovieClick)
     }
 
     override fun onBindViewHolder(holder: HomeMoviesViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 
-    class HomeMoviesViewHolder(val binding: HomeMovieItemBinding):
+    class HomeMoviesViewHolder(val binding: HomeMovieItemBinding,
+                               private val onMovieClick: (movie: MovieEntity) -> Unit):
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(movie: MovieEntity) {
             binding.movie = movie
+            binding.root.setOnClickListener {
+                onMovieClick.invoke(movie)
+            }
         }
     }
 
