@@ -22,8 +22,8 @@ data class MovieEntity(
     val popularity: Float,
     val voteCount: Int,
     val budget: Int,
-    val genres: List<String>?,
-    val director: Director?,
+    val genres: List<String>,
+    val director: Director,
     val cast: List<Cast>?
 ): Parcelable {
 

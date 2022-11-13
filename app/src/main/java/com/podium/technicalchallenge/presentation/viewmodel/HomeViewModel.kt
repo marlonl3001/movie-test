@@ -19,7 +19,8 @@ class HomeViewModel(private val useCase: MainUseCase) : BaseMoviesViewModel() {
 
     fun getMovies() {
         launch {
-            mutableMovies.postValue(useCase.getMovies())
+            mutableMovies.postValue(useCase.getMovies(limit = pageLimit))
+            pageLimit += INITIAL_PAGE_NUMBER
         }
     }
 

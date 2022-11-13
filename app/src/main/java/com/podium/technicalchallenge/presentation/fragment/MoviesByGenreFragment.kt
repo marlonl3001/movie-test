@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.podium.technicalchallenge.R
@@ -53,6 +54,24 @@ class MoviesByGenreFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.genre_menu, menu)
+
+        val search = menu.findItem(R.id.search)
+        val searchView = search.actionView as SearchView
+        searchView.queryHint = getString(R.string.search)
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                return false
+            }
+            override fun onQueryTextChange(newText: String): Boolean {
+                isSorting = true
+                moviesAdapter.filterMovies(newText)
+                return true
+            }
+        })
+        searchView.setOnCloseListener {
+            isSorting = false
+            isSorting
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -126,7 +145,7 @@ class MoviesByGenreFragment : Fragment() {
         override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
             super.onScrollStateChanged(recyclerView, newState)
 
-            if (recyclerView.canScrollVertically(RecyclerView.VERTICAL).not()) {
+            if (recyclerView.canScrollVertically(RecyclerView.VERTICAL).not() && !isSorting) {
                 viewModel.getMovies(genre)
             }
         }

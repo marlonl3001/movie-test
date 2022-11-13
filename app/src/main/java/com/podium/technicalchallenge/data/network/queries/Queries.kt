@@ -48,6 +48,10 @@ object Queries {
                         popularity
                         voteCount
                         budget
+                        genres
+                        director {
+                          name
+                        }
                       }
                     }
                 """

@@ -10,11 +10,13 @@ import com.podium.technicalchallenge.databinding.GenreMovieItemBinding
 import com.podium.technicalchallenge.databinding.HomeMovieItemBinding
 import com.podium.technicalchallenge.domain.entity.MovieEntity
 
+private const val MIN_QUERY_CHAR_SIZE = 4
 class MoviesAdapter(
     private val onMovieClick: (movie: MovieEntity) -> Unit,
     private val useHomeViewHolder: Boolean = true
 ):
     ListAdapter<MovieEntity, MoviesAdapter.HomeMoviesViewHolder>(MoviesCallback()) {
+    var currentMovieList: List<MovieEntity>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeMoviesViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -29,6 +31,24 @@ class MoviesAdapter(
 
     override fun onBindViewHolder(holder: HomeMoviesViewHolder, position: Int) {
         holder.bind(getItem(position))
+    }
+
+    fun filterMovies(query: String) {
+        var filteredItems = listOf<MovieEntity>()
+
+        if (currentMovieList.isNullOrEmpty())
+            currentMovieList = this.currentList
+
+        if (query.length >= MIN_QUERY_CHAR_SIZE) {
+            filteredItems = this.currentList.filter { movie ->
+                movie.title.contains(query, true) ||
+                        movie.genres.contains(query) ||
+                        movie.director.name.contains(query, true)}
+        }
+
+        this.submitList(
+            filteredItems.ifEmpty { currentMovieList }
+        )
     }
 
     class HomeMoviesViewHolder(val binding: ViewDataBinding,

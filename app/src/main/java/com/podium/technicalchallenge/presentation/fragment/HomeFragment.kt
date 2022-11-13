@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
 import com.podium.technicalchallenge.databinding.FragmentHomeBinding
 import com.podium.technicalchallenge.domain.entity.MovieEntity
 import com.podium.technicalchallenge.presentation.adapter.GenresAdapter
@@ -12,6 +13,7 @@ import com.podium.technicalchallenge.presentation.adapter.MoviesAdapter
 import com.podium.technicalchallenge.presentation.binding.ViewBinding.bindLoadImage
 import com.podium.technicalchallenge.utils.extension.navigateTo
 import com.podium.technicalchallenge.presentation.viewmodel.HomeViewModel
+import com.podium.technicalchallenge.presentation.viewmodel.INITIAL_PAGE_NUMBER
 import com.podium.technicalchallenge.utils.SpacesItemDecoration
 import com.podium.technicalchallenge.utils.extension.showBottomSheet
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -20,6 +22,7 @@ private const val GENRES_SPACE_DECORATION = 16
 const val START_POSITION = 0
 
 class HomeFragment: Fragment() {
+    private var isSorting = false
     private var binding: FragmentHomeBinding? = null
     private val viewModel: HomeViewModel by viewModel()
 
@@ -62,8 +65,13 @@ class HomeFragment: Fragment() {
 
             allMovies.observe(viewLifecycleOwner) {
                 moviesAdapter.submitList(it)
-                binding?.recyclerBrowseAll?.smoothScrollToPosition(START_POSITION)
-                setRecommendedMovie(it?.random())
+                if (isSorting) {
+                    binding?.recyclerBrowseAll?.smoothScrollToPosition(START_POSITION)
+                    isSorting = false
+                }
+
+                if (it?.size == INITIAL_PAGE_NUMBER)
+                    setRecommendedMovie(it.random())
             }
 
             genresList.observe(viewLifecycleOwner) {
@@ -89,6 +97,7 @@ class HomeFragment: Fragment() {
             recyclerTopMovies.addItemDecoration(SpacesItemDecoration())
             recyclerGenres.addItemDecoration(SpacesItemDecoration(GENRES_SPACE_DECORATION))
             recyclerBrowseAll.addItemDecoration(SpacesItemDecoration(spanCount = 2))
+            recyclerBrowseAll.addOnScrollListener(onScrollListener())
 
             topFiveMoviesAdapter = topMoviesAdapter
             allMoviesAdapter = moviesAdapter
@@ -120,5 +129,16 @@ class HomeFragment: Fragment() {
             }
         }
         showBottomSheet(bottomSheet)
+        isSorting = true
+    }
+
+    private fun onScrollListener() = object: RecyclerView.OnScrollListener() {
+        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+            super.onScrollStateChanged(recyclerView, newState)
+
+            if (recyclerView.canScrollHorizontally(RecyclerView.HORIZONTAL).not()) {
+                viewModel.getMovies()
+            }
+        }
     }
 }

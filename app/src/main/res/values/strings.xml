@@ -12,4 +12,5 @@
     <string name="expand">Expand</string>
     <string name="cast">Cast</string>
     <string name="sort">Sort</string>
+    <string name="search">Search</string>
 </resources>
