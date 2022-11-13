@@ -13,7 +13,11 @@ import com.podium.technicalchallenge.presentation.binding.ViewBinding.bindLoadIm
 import com.podium.technicalchallenge.utils.extension.navigateTo
 import com.podium.technicalchallenge.presentation.viewmodel.HomeViewModel
 import com.podium.technicalchallenge.utils.SpacesItemDecoration
+import com.podium.technicalchallenge.utils.extension.showBottomSheet
 import org.koin.androidx.viewmodel.ext.android.viewModel
+
+private const val GENRES_SPACE_DECORATION = 16
+const val START_POSITION = 0
 
 class HomeFragment: Fragment() {
     private var binding: FragmentHomeBinding? = null
@@ -58,6 +62,7 @@ class HomeFragment: Fragment() {
 
             allMovies.observe(viewLifecycleOwner) {
                 moviesAdapter.submitList(it)
+                binding?.recyclerBrowseAll?.smoothScrollToPosition(START_POSITION)
                 setRecommendedMovie(it?.random())
             }
 
@@ -78,16 +83,18 @@ class HomeFragment: Fragment() {
     private fun setupRecyclerView() {
         topMoviesAdapter = MoviesAdapter(onMovieClickListener())
         moviesAdapter = MoviesAdapter(onMovieClickListener())
-        genresAdapter = GenresAdapter()
+        genresAdapter = GenresAdapter(onGenreClickListener())
 
         binding?.apply {
             recyclerTopMovies.addItemDecoration(SpacesItemDecoration())
-            recyclerGenres.addItemDecoration(SpacesItemDecoration(16))
+            recyclerGenres.addItemDecoration(SpacesItemDecoration(GENRES_SPACE_DECORATION))
             recyclerBrowseAll.addItemDecoration(SpacesItemDecoration(spanCount = 2))
 
             topFiveMoviesAdapter = topMoviesAdapter
             allMoviesAdapter = moviesAdapter
             homeGenresAdapter = genresAdapter
+
+            btnSort.setOnClickListener { openSortBottomSheet() }
         }
     }
 
@@ -100,5 +107,18 @@ class HomeFragment: Fragment() {
 
     private fun onMovieClickListener(): (movie: MovieEntity) -> Unit = {
         navigateTo(HomeFragmentDirections.actionHomeToMovieDetailFragment(it))
+    }
+
+    private fun onGenreClickListener(): (genre: String) -> Unit = {
+        navigateTo(HomeFragmentDirections.actionHomeToMoviesByGenreFragment(it))
+    }
+
+    private fun openSortBottomSheet() {
+        val bottomSheet = SortBottomSheetFragment().apply {
+            itemClick = { sortItem ->
+                viewModel.sortMovies(sortItem)
+            }
+        }
+        showBottomSheet(bottomSheet)
     }
 }

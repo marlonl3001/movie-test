@@ -2,20 +2,27 @@ package com.podium.technicalchallenge.presentation.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.podium.technicalchallenge.databinding.GenreMovieItemBinding
 import com.podium.technicalchallenge.databinding.HomeMovieItemBinding
 import com.podium.technicalchallenge.domain.entity.MovieEntity
 
 class MoviesAdapter(
-    private val onMovieClick: (movie: MovieEntity) -> Unit
+    private val onMovieClick: (movie: MovieEntity) -> Unit,
+    private val useHomeViewHolder: Boolean = true
 ):
     ListAdapter<MovieEntity, MoviesAdapter.HomeMoviesViewHolder>(MoviesCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeMoviesViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val binding = HomeMovieItemBinding.inflate(inflater, parent, false)
+        val binding =
+            if (useHomeViewHolder)
+                HomeMovieItemBinding.inflate(inflater, parent, false)
+            else
+                GenreMovieItemBinding.inflate(inflater, parent, false)
 
         return HomeMoviesViewHolder(binding, onMovieClick)
     }
@@ -24,14 +31,21 @@ class MoviesAdapter(
         holder.bind(getItem(position))
     }
 
-    class HomeMoviesViewHolder(val binding: HomeMovieItemBinding,
+    class HomeMoviesViewHolder(val binding: ViewDataBinding,
                                private val onMovieClick: (movie: MovieEntity) -> Unit):
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(movie: MovieEntity) {
-            binding.movie = movie
-            binding.root.setOnClickListener {
-                onMovieClick.invoke(movie)
+        fun bind(movieEntity: MovieEntity) {
+            (binding as? HomeMovieItemBinding)?.apply {
+                movie = movieEntity
+                root.setOnClickListener {
+                    onMovieClick.invoke(movieEntity)
+                }
+            } ?: (binding as? GenreMovieItemBinding)?.apply {
+                movie = movieEntity
+                root.setOnClickListener {
+                    onMovieClick.invoke(movieEntity)
+                }
             }
         }
     }

@@ -1,9 +1,9 @@
 package com.podium.technicalchallenge.di
 
-import com.podium.technicalchallenge.data.repository.HomeRepository
-import com.podium.technicalchallenge.data.repository.HomeRepositoryImpl
+import com.podium.technicalchallenge.data.repository.MainRepository
+import com.podium.technicalchallenge.data.repository.MainRepositoryImpl
 import org.koin.dsl.module
 
 val repositoryModule = module {
-    single<HomeRepository> { HomeRepositoryImpl(get()) }
+    single<MainRepository> { MainRepositoryImpl(get()) }
 }

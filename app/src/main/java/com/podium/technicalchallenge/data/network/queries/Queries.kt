@@ -1,17 +1,30 @@
 package com.podium.technicalchallenge.data.network.queries
 
 object Queries {
-    fun moviesQuery(limit: Int?): String {
+    fun moviesQuery(genre: String? = null, limit: Int, orderBy: Boolean = false,
+                    sort: Boolean = false): String {
+        var moviesParameters = "movies(limit:${limit}"
+
+        genre?.let { moviesParameters += ", genre: \"$genre\""}
+
+        if (orderBy) moviesParameters += ", orderBy:\"voteAverage\""
+        if (sort) moviesParameters += ", sort: DESC"
+
+        moviesParameters += ") {"
+
         val query =
-            if (limit != null) {
+            if (genre == null) {
                 """
                     query GetMoviesQuery {
-                      movies(limit:${limit}, orderBy:"voteAverage", sort: DESC) {
+                      $moviesParameters
                         title
                         releaseDate
                         posterPath
                         voteAverage
                         overview
+                        popularity
+                        voteCount
+                        budget
                         genres
                         cast {
                             name
@@ -26,20 +39,15 @@ object Queries {
             } else {
                 """
                     query GetMoviesQuery {
-                      movies {
+                      $moviesParameters
                         title
                         releaseDate
                         posterPath
                         voteAverage
                         overview
-                        genres
-                        cast {
-                            name
-                            profilePath
-                        }
-                        director {
-                          name
-                        }
+                        popularity
+                        voteCount
+                        budget
                       }
                     }
                 """

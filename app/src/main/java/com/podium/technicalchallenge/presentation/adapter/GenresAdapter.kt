@@ -5,27 +5,35 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.podium.technicalchallenge.databinding.MovieGenreTemBinding
+import com.podium.technicalchallenge.databinding.MovieGenreItemBinding
 
-class GenresAdapter:
+class GenresAdapter(
+    private val onGenreClick: (genre: String) -> Unit
+):
     ListAdapter<String, GenresAdapter.GenresViewHolder>(GenresCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GenresViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val binding = MovieGenreTemBinding.inflate(inflater, parent, false)
+        val binding = MovieGenreItemBinding.inflate(inflater, parent, false)
 
-        return GenresViewHolder(binding)
+        return GenresViewHolder(binding, onGenreClick)
     }
 
     override fun onBindViewHolder(holder: GenresViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 
-    class GenresViewHolder(val binding: MovieGenreTemBinding):
+    class GenresViewHolder(val binding: MovieGenreItemBinding,
+                           private val onGenreClick: (genre: String) -> Unit):
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(genre: String) {
-            binding.genre = genre
+        fun bind(genreName: String) {
+            binding.apply {
+                genre = genreName
+                root.setOnClickListener {
+                    onGenreClick.invoke(genreName)
+                }
+            }
         }
     }
 

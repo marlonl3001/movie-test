@@ -42,7 +42,7 @@ class MovieDetailFragment : Fragment() {
                 val movieObject = MovieDetailFragmentArgs.fromBundle(bundle).movie
                 movie = movieObject
                 recyclerCast.addItemDecoration(SpacesItemDecoration())
-                recyclerCast.adapter = CastAdapter(movieObject.cast)
+                recyclerCast.adapter = CastAdapter(movieObject.cast ?: listOf())
             }
         }
     }

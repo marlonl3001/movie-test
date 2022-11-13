@@ -18,15 +18,18 @@ data class MovieEntity(
     val releaseDate: String,
     val posterPath: String,
     val voteAverage: Float,
-    val overview: String,
-    val genres: List<String>,
-    val director: Director,
-    val cast: List<Cast>
+    val overview: String?,
+    val popularity: Float,
+    val voteCount: Int,
+    val budget: Int,
+    val genres: List<String>?,
+    val director: Director?,
+    val cast: List<Cast>?
 ): Parcelable {
 
     fun getStringAverage() = voteAverage.toString()
     fun getRatingAverage() = voteAverage/AVERAGE_DIFF
-    fun getDirectorName() = HtmlCompat.fromHtml(DIRECTOR_TEXT + director.name, FROM_HTML_MODE_LEGACY)
+    fun getDirectorName() = HtmlCompat.fromHtml(DIRECTOR_TEXT + director?.name, FROM_HTML_MODE_LEGACY)
     fun getReleaseYear(): String {
         val date = releaseDate.toDate()
         val year = date?.getYearFromDate()
@@ -35,8 +38,10 @@ data class MovieEntity(
     fun getGenresList(): Spanned {
         var genresString = GENRE_TEXT
 
-        for (genre in genres) {
-            genresString += genre + if (genre != genres.last()) ", " else ""
+        if (genres != null) {
+            for (genre in genres) {
+                genresString += genre + if (genre != genres.last()) ", " else ""
+            }
         }
         return HtmlCompat.fromHtml(genresString, FROM_HTML_MODE_LEGACY)
     }
