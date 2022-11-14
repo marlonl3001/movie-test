@@ -3,7 +3,6 @@ package com.podium.technicalchallenge.presentation.binding
 import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.activity.OnBackPressedDispatcherOwner
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 
@@ -13,7 +12,7 @@ object ViewBinding {
     @BindingAdapter("toast")
     fun bindToast(view: View, text: String?) {
         text?.let {
-            Toast.makeText(view.context, it, Toast.LENGTH_SHORT).show()
+            Toast.makeText(view.context, it, Toast.LENGTH_LONG).show()
         }
     }
 
@@ -32,17 +31,6 @@ object ViewBinding {
             View.GONE
         } else {
             View.VISIBLE
-        }
-    }
-
-    @JvmStatic
-    @BindingAdapter("onBackPressed")
-    fun bindOnBackPressed(view: View, onBackPress: Boolean) {
-        val context = view.context
-        if (onBackPress && context is OnBackPressedDispatcherOwner) {
-            view.setOnClickListener {
-                context.onBackPressedDispatcher.onBackPressed()
-            }
         }
     }
 }

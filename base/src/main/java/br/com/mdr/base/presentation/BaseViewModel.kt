@@ -6,18 +6,18 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.mdr.base.extension.toErrorWrapper
 import br.com.mdr.base.extension.toUnknownErrorWrapper
+import br.com.mdr.base.model.ApiError
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.net.UnknownHostException
 
-const val IO_DISPATCHER = "IO"
-
 abstract class BaseViewModel : ViewModel() {
     private var _loading = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean> = _loading
 
-    var errorApi = MutableLiveData<Error>()
+    private var _apiError = MutableLiveData<ApiError>()
+    val apiError: LiveData<ApiError> = _apiError
 
     protected fun launch(
         enableLoading: Boolean = true,
@@ -44,10 +44,10 @@ abstract class BaseViewModel : ViewModel() {
     }
 
     private fun postErrorValue(throwable: Throwable) {
-        this.postErrorValue(errorApi, throwable)
+        this.postErrorValue(_apiError, throwable)
     }
 
-    private fun postErrorValue(dispatcher: MutableLiveData<Error>, throwable: Throwable) {
+    private fun postErrorValue(dispatcher: MutableLiveData<ApiError>, throwable: Throwable) {
         if (throwable is HttpException) {
             dispatcher.postValue(throwable.toErrorWrapper())
         } else if (throwable is UnknownHostException) {

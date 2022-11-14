@@ -2,9 +2,7 @@ package com.podium.technicalchallenge.presentation.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import br.com.mdr.base.presentation.BaseViewModel
 import com.podium.technicalchallenge.domain.entity.MovieEntity
-import com.podium.technicalchallenge.domain.entity.SortType
 import com.podium.technicalchallenge.domain.usecase.MainUseCase
 
 private const val TOP_FIVE_MOVIES = 5

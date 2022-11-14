@@ -16,6 +16,7 @@ import com.podium.technicalchallenge.presentation.viewmodel.HomeViewModel
 import com.podium.technicalchallenge.presentation.viewmodel.INITIAL_PAGE_NUMBER
 import com.podium.technicalchallenge.utils.SpacesItemDecoration
 import com.podium.technicalchallenge.utils.extension.showBottomSheet
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 private const val GENRES_SPACE_DECORATION = 16
@@ -24,7 +25,7 @@ const val START_POSITION = 0
 class HomeFragment: Fragment() {
     private var isSorting = false
     private var binding: FragmentHomeBinding? = null
-    private val viewModel: HomeViewModel by viewModel()
+    private val viewModel: HomeViewModel by sharedViewModel()
 
     private lateinit var topMoviesAdapter: MoviesAdapter
     private lateinit var genresAdapter: GenresAdapter
@@ -76,10 +77,6 @@ class HomeFragment: Fragment() {
 
             genresList.observe(viewLifecycleOwner) {
                 genresAdapter.submitList(it)
-            }
-
-            errorApi.observe(viewLifecycleOwner) {
-
             }
 
             getMovies()

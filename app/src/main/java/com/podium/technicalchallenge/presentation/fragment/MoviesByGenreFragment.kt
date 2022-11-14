@@ -21,12 +21,12 @@ import com.podium.technicalchallenge.utils.SpacesItemDecoration
 import com.podium.technicalchallenge.utils.extension.navigateTo
 import com.podium.technicalchallenge.utils.extension.pop
 import com.podium.technicalchallenge.utils.extension.showBottomSheet
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class MoviesByGenreFragment : Fragment() {
     private lateinit var moviesAdapter: MoviesAdapter
     private var binding: MoviesByGenreFragmentBinding? = null
-    private val viewModel: MoviesByGenreViewModel by viewModel()
+    private val viewModel: MoviesByGenreViewModel by sharedViewModel()
 
     private var isSorting = false
 
@@ -97,10 +97,6 @@ class MoviesByGenreFragment : Fragment() {
                     binding?.recyclerMovies?.smoothScrollToPosition(START_POSITION)
                     isSorting = false
                 }
-            }
-
-            errorApi.observe(viewLifecycleOwner) {
-
             }
 
             getMovies(genre)
