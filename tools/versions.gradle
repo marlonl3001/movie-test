@@ -45,6 +45,7 @@ version.bundler = '1.0.4'
 version.navigation_safe_args = '2.5.3'
 version.circular_imageview = '4.3.1'
 version.gson = '2.9.0'
+version.chart = '3.1.0'
 
 def androidx = [:]
 androidx.appcompat = "androidx.appcompat:appcompat:$version.supportLibrary"
@@ -101,6 +102,7 @@ def others = [:]
 others.timber = "com.jakewharton.timber:timber:$version.timber"
 others.circular_imageview = "com.mikhaellopez:circularimageview:$version.circular_imageview"
 others.gson = "com.google.code.gson:gson:$version.gson"
+others.chart = "com.github.PhilJay:MPAndroidChart:$version.chart"
 
 def retrofit = [:]
 retrofit.runtime = "com.squareup.retrofit2:retrofit:$version.retrofit"

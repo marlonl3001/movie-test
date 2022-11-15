@@ -25,9 +25,10 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:title="@null"
+                app:layout_constraintTop_toTopOf="parent"
                 app:navigationIcon="@drawable/ic_arrow_back"
-                app:navigationIconTint="@color/white"/>
+                app:navigationIconTint="@color/white"
+                app:title="@null"/>
 
         </com.google.android.material.appbar.AppBarLayout>
 

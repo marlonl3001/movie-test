@@ -23,6 +23,7 @@ import com.podium.technicalchallenge.utils.extension.pop
 import com.podium.technicalchallenge.utils.extension.showBottomSheet
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
+private const val IS_SORTING_KEY = "isSorting"
 class MoviesByGenreFragment : Fragment() {
     private lateinit var moviesAdapter: MoviesAdapter
     private var binding: MoviesByGenreFragmentBinding? = null
@@ -30,26 +31,38 @@ class MoviesByGenreFragment : Fragment() {
 
     private var isSorting = false
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        isSorting = savedInstanceState?.getBoolean(IS_SORTING_KEY) ?: isSorting
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = MoviesByGenreFragmentBinding.inflate(inflater)
+
         return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setHasOptionsMenu(true)
+
         arguments?.let {
             setupView(MoviesByGenreFragmentArgs.fromBundle(it).genre)
         }
-        setHasOptionsMenu(true)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putBoolean(IS_SORTING_KEY, isSorting)
+        super.onSaveInstanceState(outState)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -93,13 +106,12 @@ class MoviesByGenreFragment : Fragment() {
         with(viewModel) {
             allMovies.observe(viewLifecycleOwner) {
                 moviesAdapter.submitList(it)
-                if (isSorting) {
-                    binding?.recyclerMovies?.smoothScrollToPosition(START_POSITION)
-                    isSorting = false
-                }
+                if (isSorting)
+                    binding?.recyclerMovies?.smoothScrollToPosition(RecyclerView.VERTICAL)
             }
 
-            getMovies(genre)
+            if (!isSorting)
+                getMovies(genre)
         }
     }
 

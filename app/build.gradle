@@ -71,7 +71,8 @@ dependencies {
     api deps.glide.compiler
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
-    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    //Chart
+    implementation deps.others.chart
 
     implementation project(path: ":base")
     implementation project(path: ":test")

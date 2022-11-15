@@ -13,4 +13,5 @@
     <string name="cast">Cast</string>
     <string name="sort">Sort</string>
     <string name="search">Search</string>
+    <string name="top_10_rating_movies">Top 5 most-rated movies</string>
 </resources>

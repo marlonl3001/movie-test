@@ -17,13 +17,13 @@ open class BaseMoviesViewModel : BaseViewModel() {
         allMovies.value?.apply {
             val sortedMovies =
                 when(sortType) {
-                    SortType.BUDGET -> this.sortedBy { it.budget }
-                    SortType.OVERVIEW -> this.sortedBy { it.overview }
-                    SortType.POPULARITY -> this.sortedBy { it.popularity }
+                    SortType.BUDGET -> this.sortedByDescending { it.budget }
+                    SortType.OVERVIEW -> this.sortedByDescending { it.overview }
+                    SortType.POPULARITY -> this.sortedByDescending { it.popularity }
                     SortType.RELEASE_DATE -> this.sortedBy { it.releaseDate }
                     SortType.TITLE -> this.sortedBy { it.title }
-                    SortType.VOTE_AVERAGE -> this.sortedBy { it.voteAverage }
-                    SortType.VOTE_COUNT -> this.sortedBy { it.voteCount }
+                    SortType.VOTE_AVERAGE -> this.sortedByDescending { it.voteAverage }
+                    SortType.VOTE_COUNT -> this.sortedByDescending { it.voteCount }
                 }
 
             mutableMovies.postValue(sortedMovies)
