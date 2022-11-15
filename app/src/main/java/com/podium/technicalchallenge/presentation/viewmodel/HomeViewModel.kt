@@ -2,10 +2,10 @@ package com.podium.technicalchallenge.presentation.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.podium.technicalchallenge.domain.entity.MovieEntity
+import br.com.mdr.base.domain.MovieEntity
 import com.podium.technicalchallenge.domain.usecase.MainUseCase
 
-private const val TOP_FIVE_MOVIES = 5
+const val TOP_FIVE_MOVIES = 5
 
 class HomeViewModel(private val useCase: MainUseCase) : BaseMoviesViewModel() {
 

@@ -49,7 +49,7 @@
         tools:layout="@layout/fragment_movie_detail" >
         <argument
             android:name="movie"
-            app:argType="com.podium.technicalchallenge.domain.entity.MovieEntity" />
+            app:argType="br.com.mdr.base.domain.MovieEntity" />
     </fragment>
     <fragment
         android:id="@+id/moviesByGenreFragment"
@@ -61,7 +61,11 @@
             app:argType="string" />
         <action
             android:id="@+id/action_moviesByGenreFragment_to_movieDetailFragment"
-            app:destination="@id/movieDetailFragment" />
+            app:destination="@id/movieDetailFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
 
 </navigation>

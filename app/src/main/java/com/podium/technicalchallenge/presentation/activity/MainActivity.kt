@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
                 binding.loading = it
             }
             apiError.observe(this@MainActivity) {
-                binding.error = it.errors.firstOrNull()
+                binding.error = it
             }
         }
 
@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
                 binding.loading = it
             }
             apiError.observe(this@MainActivity) {
-                binding.error = it.errors.firstOrNull()
+                binding.error = it
             }
         }
     }

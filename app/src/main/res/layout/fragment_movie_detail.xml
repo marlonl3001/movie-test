@@ -8,7 +8,7 @@
     <data>
         <variable
             name="movie"
-            type="com.podium.technicalchallenge.domain.entity.MovieEntity" />
+            type="br.com.mdr.base.domain.MovieEntity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,10 +21,12 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.appcompat.widget.Toolbar
+            <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
+                app:title="@null"
+                app:navigationIcon="@drawable/ic_arrow_back"
                 app:navigationIconTint="@color/white"/>
 
         </com.google.android.material.appbar.AppBarLayout>
@@ -45,7 +47,7 @@
                     android:scaleType="centerCrop"
                     app:imageUrl="@{movie.posterPath}"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:src="@drawable/ic_launcher_background"/>
+                    tools:src="@mipmap/ic_launcher_adaptive_fore"/>
 
                 <androidx.appcompat.widget.AppCompatTextView
                     style="@style/MovieDetailTitle"

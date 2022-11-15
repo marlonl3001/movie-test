@@ -5,6 +5,8 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.bumptech.glide.request.RequestOptions
 
 object ViewBinding {
 
@@ -21,6 +23,17 @@ object ViewBinding {
     fun ImageView.bindLoadImage(url: String?) {
         Glide.with(this.context)
             .load(url)
+            .transition(DrawableTransitionOptions.withCrossFade())
+            .into(this)
+    }
+
+    @JvmStatic
+    @BindingAdapter("circleImageUrl")
+    fun ImageView.bindLoadCircleImage(url: String?) {
+        Glide.with(this.context)
+            .load(url)
+            .apply(RequestOptions.circleCropTransform())
+            .transition(DrawableTransitionOptions.withCrossFade())
             .into(this)
     }
 

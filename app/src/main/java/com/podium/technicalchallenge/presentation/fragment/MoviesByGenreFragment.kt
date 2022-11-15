@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.podium.technicalchallenge.R
 import com.podium.technicalchallenge.databinding.MoviesByGenreFragmentBinding
-import com.podium.technicalchallenge.domain.entity.MovieEntity
+import br.com.mdr.base.domain.MovieEntity
 import com.podium.technicalchallenge.presentation.adapter.MoviesAdapter
 import com.podium.technicalchallenge.presentation.viewmodel.MoviesByGenreViewModel
 import com.podium.technicalchallenge.utils.SpacesItemDecoration

@@ -1,8 +1,8 @@
 package com.podium.technicalchallenge.domain.mapper
 
-import com.podium.technicalchallenge.data.entity.GenresResponse
-import com.podium.technicalchallenge.data.entity.MovieResponse
-import com.podium.technicalchallenge.domain.entity.MovieEntity
+import br.com.mdr.base.data.entity.GenresResponse
+import br.com.mdr.base.data.entity.MovieResponse
+import br.com.mdr.base.domain.MovieEntity
 
 object HomeMapper {
     fun MovieResponse.toMoviesList(): List<MovieEntity> = this.data.movies

@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.podium.technicalchallenge.databinding.FragmentHomeBinding
-import com.podium.technicalchallenge.domain.entity.MovieEntity
+import br.com.mdr.base.domain.MovieEntity
 import com.podium.technicalchallenge.presentation.adapter.GenresAdapter
 import com.podium.technicalchallenge.presentation.adapter.MoviesAdapter
 import com.podium.technicalchallenge.presentation.binding.ViewBinding.bindLoadImage
@@ -17,7 +17,6 @@ import com.podium.technicalchallenge.presentation.viewmodel.INITIAL_PAGE_NUMBER
 import com.podium.technicalchallenge.utils.SpacesItemDecoration
 import com.podium.technicalchallenge.utils.extension.showBottomSheet
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 private const val GENRES_SPACE_DECORATION = 16
 const val START_POSITION = 0
@@ -71,8 +70,7 @@ class HomeFragment: Fragment() {
                     isSorting = false
                 }
 
-                if (it?.size == INITIAL_PAGE_NUMBER)
-                    setRecommendedMovie(it.random())
+                setRecommendedMovie(it?.random())
             }
 
             genresList.observe(viewLifecycleOwner) {

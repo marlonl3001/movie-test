@@ -2,11 +2,9 @@ package com.podium.technicalchallenge.presentation.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.podium.technicalchallenge.databinding.CastListItemBinding
-import com.podium.technicalchallenge.domain.entity.Cast
+import br.com.mdr.base.domain.Cast
 
 class CastAdapter(
     private val castList: List<Cast>

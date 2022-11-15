@@ -7,9 +7,9 @@ import retrofit2.HttpException
 import java.net.UnknownHostException
 
 @SuppressWarnings("TooGenericExceptionCaught")
-fun HttpException.toErrorWrapper(): ApiError? {
+fun HttpException.toErrorWrapper(): Error? {
     return try {
-        this.response()?.errorBody()?.string()?.jsonToObject<ApiError>()
+        this.response()?.errorBody()?.string()?.jsonToObject<ApiError>()?.errors?.first()
     } catch (ex: Exception) {
         createDefaultError(ex.message)
     }
@@ -18,4 +18,4 @@ fun HttpException.toErrorWrapper(): ApiError? {
 fun UnknownHostException.toUnknownErrorWrapper() = createDefaultError(this.message)
 
 private fun createDefaultError(message: String?) =
-    ApiError(listOf(Error(message ?: "")))
+    Error(message ?: "")

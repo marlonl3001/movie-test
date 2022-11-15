@@ -1,13 +1,9 @@
 package com.podium.technicalchallenge.presentation.fragment
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.podium.technicalchallenge.R
 import com.podium.technicalchallenge.databinding.FragmentMovieDetailBinding
@@ -32,7 +28,6 @@ class MovieDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setHasOptionsMenu(true)
         setupView()
     }
 
@@ -41,22 +36,9 @@ class MovieDetailFragment : Fragment() {
         binding = null
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.genre_menu, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            android.R.id.home -> pop()
-        }
-        return true
-    }
-
     private fun setupView() {
-        (activity as? AppCompatActivity)?.apply {
-            setSupportActionBar(binding?.toolbar)
-            supportActionBar?.setDisplayHomeAsUpEnabled(true)
-            supportActionBar?.title = null
+        binding?.toolbar?.setNavigationOnClickListener {
+            pop()
         }
 
         fetchMovieData()

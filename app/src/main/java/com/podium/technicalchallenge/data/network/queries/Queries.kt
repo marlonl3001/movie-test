@@ -49,6 +49,10 @@ object Queries {
                         voteCount
                         budget
                         genres
+                        cast {
+                            name
+                            profilePath
+                        }
                         director {
                           name
                         }

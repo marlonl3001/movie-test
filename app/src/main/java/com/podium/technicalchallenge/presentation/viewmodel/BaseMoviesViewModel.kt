@@ -3,7 +3,7 @@ package com.podium.technicalchallenge.presentation.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import br.com.mdr.base.presentation.BaseViewModel
-import com.podium.technicalchallenge.domain.entity.MovieEntity
+import br.com.mdr.base.domain.MovieEntity
 import com.podium.technicalchallenge.domain.entity.SortType
 
 const val INITIAL_PAGE_NUMBER = 30

@@ -2,7 +2,7 @@ package com.podium.technicalchallenge.domain.usecase
 
 import com.podium.technicalchallenge.data.repository.MainRepository
 import com.podium.technicalchallenge.data.repository.QUERY_LIMIT
-import com.podium.technicalchallenge.domain.entity.MovieEntity
+import br.com.mdr.base.domain.MovieEntity
 import com.podium.technicalchallenge.domain.mapper.HomeMapper.toGenresList
 import com.podium.technicalchallenge.domain.mapper.HomeMapper.toMoviesList
 

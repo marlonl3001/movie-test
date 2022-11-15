@@ -1,0 +1,23 @@
+{
+  "data": {
+    "genres": [
+      "Thriller",
+      "Action",
+      "Science Fiction",
+      "Fantasy",
+      "Adventure",
+      "Family",
+      "Animation",
+      "Comedy",
+      "Drama",
+      "Music",
+      "Crime",
+      "History",
+      "Mystery",
+      "Horror",
+      "Romance",
+      "War",
+      "TV Movie"
+    ]
+  }
+}

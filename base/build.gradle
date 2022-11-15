@@ -38,7 +38,7 @@ dependencies {
     api deps.others.timber
 
     //Gson
-    implementation 'com.google.code.gson:gson:2.8.9'
+    implementation deps.others.gson
 
     //Retrofit
     api deps.retrofit.runtime

@@ -1,0 +1,19 @@
+package br.com.mdr.test.extension
+
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
+import io.mockk.Runs
+import io.mockk.every
+import io.mockk.just
+import io.mockk.mockk
+import org.junit.Assert.assertFalse
+import java.util.concurrent.CountDownLatch
+import java.util.concurrent.TimeUnit
+import java.util.concurrent.TimeoutException
+
+inline fun <reified T : Any?> LiveData<T>.test(): Observer<T> {
+    assertFalse(hasObservers())
+    val observer = mockk<Observer<T>> { every { onChanged(any()) } just Runs }
+    observeForever(observer)
+    return observer
+}

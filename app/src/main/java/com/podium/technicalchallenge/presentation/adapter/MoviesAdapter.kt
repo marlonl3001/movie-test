@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.podium.technicalchallenge.databinding.GenreMovieItemBinding
 import com.podium.technicalchallenge.databinding.HomeMovieItemBinding
-import com.podium.technicalchallenge.domain.entity.MovieEntity
+import br.com.mdr.base.domain.MovieEntity
 
 private const val MIN_QUERY_CHAR_SIZE = 4
 class MoviesAdapter(

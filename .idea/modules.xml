@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/MovieFlix.iml" filepath="$PROJECT_DIR$/.idea/modules/MovieFlix.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/MovieFlix.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/MovieFlix.app.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/base/MovieFlix.base.iml" filepath="$PROJECT_DIR$/.idea/modules/base/MovieFlix.base.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/test/MovieFlix.test.iml" filepath="$PROJECT_DIR$/.idea/modules/test/MovieFlix.test.iml" />
     </modules>
   </component>
 </project>

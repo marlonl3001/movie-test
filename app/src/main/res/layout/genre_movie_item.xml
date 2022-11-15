@@ -7,7 +7,7 @@
 
     <variable
       name="movie"
-      type="com.podium.technicalchallenge.domain.entity.MovieEntity" />
+      type="br.com.mdr.base.domain.MovieEntity" />
 
   </data>
 
