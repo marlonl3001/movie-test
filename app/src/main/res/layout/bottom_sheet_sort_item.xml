@@ -8,6 +8,7 @@
         android:id="@+id/txtSort"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:foreground="?android:attr/selectableItemBackgroundBorderless"
         android:gravity="center"
         android:paddingVertical="@dimen/margin8"
         tools:text="Overview"/>
