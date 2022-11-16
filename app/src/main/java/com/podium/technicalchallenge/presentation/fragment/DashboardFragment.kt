@@ -13,12 +13,13 @@ import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.utils.ColorTemplate
-import com.github.mikephil.charting.utils.MPPointF
 import com.podium.technicalchallenge.R
 import com.podium.technicalchallenge.databinding.FragmentDashboardBinding
 import com.podium.technicalchallenge.presentation.viewmodel.HomeViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
+private const val CHART_ANIMATION_DURATION = 1400
+private const val MAX_INDEX = 4
 class DashboardFragment : Fragment() {
 
     private var binding: FragmentDashboardBinding? = null
@@ -45,7 +46,11 @@ class DashboardFragment : Fragment() {
         setupChart()
 
         viewModel.allMovies.observe(viewLifecycleOwner) { movies ->
-            movies?.let { setupChartData(it) }
+            movies?.let {
+                setupChartData(it.sortedByDescending { movie ->
+                    movie.voteCount
+                })
+            }
         }
     }
 
@@ -61,7 +66,7 @@ class DashboardFragment : Fragment() {
             chart.isRotationEnabled = true
             chart.isHighlightPerTapEnabled = true
 
-            chart.animateY(1400, Easing.EaseInOutQuad)
+            chart.animateY(CHART_ANIMATION_DURATION, Easing.EaseInOutQuad)
 
             val l = chart.legend
             l.verticalAlignment = Legend.LegendVerticalAlignment.TOP
@@ -72,24 +77,17 @@ class DashboardFragment : Fragment() {
     }
 
     private fun setupChartData(movies: List<MovieEntity>) {
-        val sortedMovies = movies.sortedByDescending { it.voteCount }
         val pieEntries = mutableListOf<PieEntry>()
-        val top10Movies = mutableListOf<MovieEntity>()
+        val top5Movies = mutableListOf<MovieEntity>()
 
-        for (index in 0..4)
-            top10Movies.add(sortedMovies[index])
+        for (index in 0..MAX_INDEX)
+            top5Movies.add(movies[index])
 
-        for (movie in top10Movies) {
+        for (movie in top5Movies) {
             pieEntries.add(PieEntry(movie.voteCount.toFloat(), movie.title))
         }
 
         val dataSet = PieDataSet(pieEntries, null)
-
-        dataSet.setDrawIcons(false)
-
-        dataSet.sliceSpace = 3f
-        dataSet.iconsOffset = MPPointF(0F, 40F)
-        dataSet.selectionShift = 5f
 
         // add a lot of colors
         val colors: ArrayList<Int> = ArrayList()

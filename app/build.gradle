@@ -19,8 +19,6 @@ android {
         targetSdk deps.version.targetSdk
         versionCode 1
         versionName "1.0"
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -50,7 +48,6 @@ dependencies {
     implementation deps.androidx.navigation_fragment
     implementation deps.androidx.navigation_ui
     implementation deps.androidx.recyclerview
-    implementation deps.androidx.viewpager2
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
 
     implementation deps.material.runtime

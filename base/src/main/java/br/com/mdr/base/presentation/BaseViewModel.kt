@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.mdr.base.extension.toErrorWrapper
 import br.com.mdr.base.extension.toUnknownErrorWrapper
-import br.com.mdr.base.model.ApiError
 import br.com.mdr.base.model.Error
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch

@@ -9,23 +9,15 @@
         android:layout_height="match_parent"
         tools:context=".presentation.fragment.DashboardFragment">
 
-        <com.google.android.material.appbar.AppBarLayout
-            style="@style/AppBarLayout"
-            android:id="@+id/appBarLayout"
-            android:layout_width="match_parent"
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/SectionTextStyle"
+            android:id="@+id/txtTitle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:layout_constraintTop_toTopOf="parent"
-                app:navigationIcon="@drawable/ic_arrow_back"
-                app:navigationIconTint="@color/white"
-                app:title="@null"/>
-
-        </com.google.android.material.appbar.AppBarLayout>
+            android:text="@string/top_5_rated_movies"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <com.github.mikephil.charting.charts.PieChart
             android:id="@+id/chartMovies"
@@ -34,6 +26,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/appBarLayout" />
+            app:layout_constraintTop_toBottomOf="@id/txtTitle" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

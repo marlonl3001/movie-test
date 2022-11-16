@@ -2,10 +2,7 @@ def version = [:]
 version.cardView = '1.0.0'
 version.fragment = '1.4.1'
 version.constraintLayout = "2.1.4"
-version.viewPager2 = "1.0.0"
-version.crashlytics = '2.10.1'
 version.glide = '4.13.2'
-version.palette = '2.1.2'
 version.gradle = '7.0.0'
 version.kotlin = '1.5.21'
 version.lifecycle = '2.4.1'
@@ -14,64 +11,39 @@ version.multidex = '1.0.3'
 version.material = "1.6.1"
 version.navigation = "2.4.2"
 version.okhttp = "4.9.2"
-version.play_services = '17.0.0'
 version.retrofit = '2.9.0'
-version.moshi = '1.11.0'
-version.room = '2.4.2'
 version.recyclerView = "1.2.0"
 version.supportLibrary = '1.4.1'
-version.detekt = '1.21.0'
-version.spotless = '6.7.2'
-version.leakcanary = '2.9.1'
 version.compileSdk = 31
 version.sdkBuildTools = '31.0.0'
 version.minSdk = 26
 version.targetSdk = 31
-version.archtoolkit = '0.5.1'
 version.koin = '2.2.3'
 version.timber = "4.7.1"
-version.play_core = "1.10.3"
-version.play_core_ktx = '1.8.1'
-version.jacoco = '0.8.7'
-version.sonarqube = '3.0'
 version.coroutines = '1.4.2'
 version.gradle_versions_plugin = '0.42.0'
-version.skydoves = '1.1.1'
-version.rainbow = '1.0.3'
-version.progress_view = '1.1.3'
 version.ribbon = '1.0.4'
-version.palette = '1.0.0'
-version.bundler = '1.0.4'
 version.navigation_safe_args = '2.5.3'
-version.circular_imageview = '4.3.1'
 version.gson = '2.9.0'
 version.chart = '3.1.0'
+version.test_rules = '1.4.0'
+version.junit = '1.1.3'
+version.core_testing = '2.1.0'
+version.mockk = '1.11.0'
 
 def androidx = [:]
 androidx.appcompat = "androidx.appcompat:appcompat:$version.supportLibrary"
 androidx.constraint_layout = "androidx.constraintlayout:constraintlayout:$version.constraintLayout"
-androidx.viewpager2 = "androidx.viewpager2:viewpager2:$version.viewPager2"
 androidx.lifecycle = "androidx.lifecycle:lifecycle-runtime-ktx:$version.lifecycle"
-androidx.lifecycle_common = "androidx.lifecycle:lifecycle-common-java8:$version.lifecycle"
 androidx.lifecycle_ext = "androidx.lifecycle:lifecycle-extensions:$version.lifecycle_ext"
 androidx.lifecycle_livedata = "androidx.lifecycle:lifecycle-livedata-ktx:$version.lifecycle"
 androidx.recyclerview = "androidx.recyclerview:recyclerview:$version.recyclerView"
 androidx.navigation_fragment = "androidx.navigation:navigation-fragment-ktx:$version.navigation"
 androidx.navigation_ui = "androidx.navigation:navigation-ui-ktx:$version.navigation"
-androidx.room_runtime = "androidx.room:room-runtime:$version.room"
-androidx.room_ktx = "androidx.room:room-ktx:$version.room"
-androidx.room_compiler = "androidx.room:room-compiler:$version.room"
-androidx.palette = "androidx.palette:palette-ktx:$version.palette"
 
 def classpath = [:]
-classpath.firebase = "com.google.gms:google-services:$version.firebase_classspath"
 classpath.gradle = "com.android.tools.build:gradle:$version.gradle"
 classpath.kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$version.kotlin"
-classpath.detekt = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:$version.detekt"
-classpath.spotless = "com.diffplug.spotless:spotless-plugin-gradle:$version.spotless"
-classpath.jacoco = "org.jacoco:org.jacoco.core:$version.jacoco"
-classpath.sonarqube = "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:$version.sonarqube"
-classpath.gradleVersionsPlugin = "com.github.ben-manes:gradle-versions-plugin:$version.gradle_versions_plugin"
 classpath.navigationSafeArgs = "androidx.navigation:navigation-safe-args-gradle-plugin:$version.navigation_safe_args"
 
 def koin = [:]
@@ -82,71 +54,45 @@ koin.test = "io.insert-koin:koin-test:$version.koin"
 def glide = [:]
 glide.runtime = "com.github.bumptech.glide:glide:$version.glide"
 glide.compiler = "com.github.bumptech.glide:compiler:$version.glide"
-glide.palette = "com.github.florent37:glidepalette:$version.palette"
-
-def kotlin = [:]
-kotlin.stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$version.kotlin"
 
 def material = [:]
 material.runtime = "com.google.android.material:material:$version.material"
 
-def support = [:]
-support.card_view = "androidx.cardview:cardview:$version.cardView"
-support.multidex = "com.android.support:multidex:$version.multidex"
-
 def okhttp = [:]
 okhttp.runtime = "com.squareup.okhttp3:okhttp:$version.okhttp"
 okhttp.logging = "com.squareup.okhttp3:logging-interceptor:$version.okhttp"
+okhttp.mockWebServer = "com.squareup.okhttp3:mockwebserver:$version.okhttp"
 
 def others = [:]
 others.timber = "com.jakewharton.timber:timber:$version.timber"
-others.circular_imageview = "com.mikhaellopez:circularimageview:$version.circular_imageview"
 others.gson = "com.google.code.gson:gson:$version.gson"
 others.chart = "com.github.PhilJay:MPAndroidChart:$version.chart"
 
 def retrofit = [:]
 retrofit.runtime = "com.squareup.retrofit2:retrofit:$version.retrofit"
-retrofit.converter_moshi = "com.squareup.retrofit2:converter-moshi:$version.retrofit"
-retrofit.adapter_rx = "com.squareup.retrofit2:adapter-rxjava2:$version.retrofit"
-
-def moshi = [:]
-moshi.runtime =  "com.squareup.moshi:moshi-kotlin:$version.moshi"
-moshi.adapters =  "com.squareup.moshi:moshi-adapters:$version.moshi"
-
-def tools = [:]
-tools.leakcanary = "com.squareup.leakcanary:leakcanary-android:$version.leakcanary"
 
 def coroutines = [:]
 coroutines.android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version.coroutines"
+coroutines.test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$version.coroutines"
 
-def detekt = [:]
-detekt.detekt_api = "io.gitlab.arturbosch.detekt:detekt-api:$version.detekt"
-detekt.detekt_test = "io.gitlab.arturbosch.detekt:detekt-test:$version.detekt"
-detekt.detekt_cli = "io.gitlab.arturbosch.detekt:detekt-cli:$version.detekt"
-
-def skydoves = [:]
-skydoves.transformation_layout = "com.github.skydoves:transformationlayout:$version.skydoves"
-skydoves.rainbow = "com.github.skydoves:rainbow:$version.rainbow"
-skydoves.progressview = "com.github.skydoves:progressview:$version.progress_view"
-skydoves.ribbon = "com.github.skydoves:androidribbon:$version.ribbon"
-skydoves.bundler = "com.github.skydoves:bundler:$version.bundler"
+def test = [:]
+test.rules = "androidx.test:rules:$version.test_rules"
+test.junit = "androidx.test.ext:junit:$version.junit"
+test.coreTesting = "androidx.arch.core:core-testing:$version.core_testing"
+test.mockk = "io.mockk:mockk:$version.mockk"
+test.mockkAndroid = "io.mockk:mockk:$version.mockk"
 
 def dependencies = [:]
 dependencies.androidx = androidx
 dependencies.classpath = classpath
 dependencies.glide = glide
-dependencies.kotlin = kotlin
 dependencies.material = material
 dependencies.okhttp = okhttp
 dependencies.others = others
-dependencies.support = support
 dependencies.retrofit = retrofit
-dependencies.moshi = moshi
 dependencies.version = version
-dependencies.tools = tools
 dependencies.koin = koin
 dependencies.coroutines = coroutines
-dependencies.detekt = detekt
-dependencies.skydoves = skydoves
+dependencies.test = test
 
 ext.deps = dependencies
