@@ -30,6 +30,11 @@ class HomeFragment: Fragment() {
     private lateinit var genresAdapter: GenresAdapter
     private lateinit var moviesAdapter: MoviesAdapter
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        isSorting = savedInstanceState?.getBoolean(IS_SORTING_KEY) ?: isSorting
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -52,6 +57,11 @@ class HomeFragment: Fragment() {
         binding = null
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putBoolean(IS_SORTING_KEY, isSorting)
+        super.onSaveInstanceState(outState)
+    }
+
     private fun setupView() {
         setupRecyclerView()
         setupViewModel()
@@ -67,7 +77,6 @@ class HomeFragment: Fragment() {
                 moviesAdapter.submitList(it)
                 if (isSorting) {
                     binding?.recyclerBrowseAll?.smoothScrollToPosition(START_POSITION)
-                    isSorting = false
                 }
 
                 setRecommendedMovie(it?.random())
@@ -77,7 +86,9 @@ class HomeFragment: Fragment() {
                 genresAdapter.submitList(it)
             }
 
-            getMovies()
+            if (!isSorting)
+                getMovies()
+
             getTopMovies()
             getGenres()
         }
@@ -131,7 +142,7 @@ class HomeFragment: Fragment() {
         override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
             super.onScrollStateChanged(recyclerView, newState)
 
-            if (recyclerView.canScrollHorizontally(RecyclerView.HORIZONTAL).not()) {
+            if (recyclerView.canScrollHorizontally(RecyclerView.HORIZONTAL).not() && !isSorting) {
                 viewModel.getMovies()
             }
         }

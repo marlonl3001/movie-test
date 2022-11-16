@@ -23,7 +23,8 @@ import com.podium.technicalchallenge.utils.extension.pop
 import com.podium.technicalchallenge.utils.extension.showBottomSheet
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-private const val IS_SORTING_KEY = "isSorting"
+const val IS_SORTING_KEY = "isSorting"
+
 class MoviesByGenreFragment : Fragment() {
     private lateinit var moviesAdapter: MoviesAdapter
     private var binding: MoviesByGenreFragmentBinding? = null
